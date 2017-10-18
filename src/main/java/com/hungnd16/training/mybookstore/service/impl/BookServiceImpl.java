@@ -22,7 +22,7 @@ public class BookServiceImpl implements BookService{
 
 	@Override
 	public List<Book> search(String query) {
-		return repository.findByBookId(query);
+		return repository.findByBookNameContaining(query);
 		//return new ArrayList<Book>();
 	}
 

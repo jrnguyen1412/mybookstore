@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+	<title>Book Store - Books</title>
+</head>
+<body>
+    <nav th:replace="layout :: header"></nav>
+
+    <div class="container main-content list">
+        <div class="row">
+            <a th:href="@{/book/addBook}" class="btn btn-success pull-left">
+                <span class="glyphicon glyphicon-plus"></span> Add new book
+            </a>
+            <form class="form-inline pull-right" action = "#" th:action="@{/book/search}" method="POST">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="query" placeholder="Type book name..." />
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+        <th:block th:if="${#lists.isEmpty(books)}">
+        	<p>No books</p>
+        </th:block>
+        <th:block th:unless="${#lists.isEmpty(books)}">
+        <div class="row">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                    	<th>No</th>
+                        <th>Book Id</th>
+                        <th>Book Name</th>
+                        <th>Book ISBN</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="book,iterStat : ${books}">
+                        <td th:text="${iterStat.count}"></td>
+                        <td th:text="${book.bookId}"></td>
+                        <td th:text="${book.bookName}"></td>
+                        <td th:text="${book.bookIsbn}"></td>
+                        <td><a th:href="@{/book/{bookId}/edit(bookId=${book.bookId})}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                        <td><a th:href="@{/book/{bookId}/delete(bookId=${book.bookId})}"><span class="glyphicon glyphicon-trash"></span></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </th:block>
+    </div>
+    <!-- /.container -->
+
+    <footer th:replace="layout :: footer"></footer>
+</body>
+</html>

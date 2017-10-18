@@ -32,3 +32,13 @@
 footer {
 	text-align: center;
 }
+
+.navbar-brand img {
+	margin: -15px;
+}
+
+.navbar-title {
+	font-size: 1.5em;
+	padding-top: 15px;
+	margin-left: 10px;
+}

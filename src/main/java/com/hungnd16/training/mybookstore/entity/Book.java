@@ -8,17 +8,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "BOOK_INFO")
+@Table(name = "book_info")
 public class Book implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(generator="my_sq", strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(sequenceName="EMPLOYEE_SEQ", name="my_sq", allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(generator="my_sq", strategy = GenerationType.SEQUENCE)
+	//@SequenceGenerator(sequenceName="BOOK_SEQ", name="my_sq", allocationSize=1)
 	@Column(name = "BOOK_ID", nullable = false)
 	private int bookId;
 
@@ -34,26 +34,17 @@ public class Book implements Serializable {
 	@Column(name = "REG_USER_ID")
 	private String regUserId;
 
-	@Column(name = "REG_ID")
-	private String regId;
-
 	@Column(name = "UPD_DATE")
 	private Date updDate;
 
 	@Column(name = "UPD_USER_ID")
 	private String updUserId;
 
-	@Column(name = "UPD_ID")
-	private String updId;
-
 	@Column(name = "DEL_DATE")
 	private Date delDate;
 
 	@Column(name = "DEL_USER_ID")
 	private String delUserId;
-
-	@Column(name = "DEL_ID")
-	private String delId;
 
 	@Column(name = "DEL_FLG", nullable = false)
 	private boolean delFlg;
@@ -109,14 +100,6 @@ public class Book implements Serializable {
 		this.regUserId = regUserId;
 	}
 
-	public String getRegId() {
-		return regId;
-	}
-
-	public void setRegId(String regId) {
-		this.regId = regId;
-	}
-
 	public Date getUpdDate() {
 		return updDate;
 	}
@@ -131,14 +114,6 @@ public class Book implements Serializable {
 
 	public void setUpdUserId(String updUserId) {
 		this.updUserId = updUserId;
-	}
-
-	public String getUpdId() {
-		return updId;
-	}
-
-	public void setUpdId(String updId) {
-		this.updId = updId;
 	}
 
 	public Date getDelDate() {
@@ -156,15 +131,7 @@ public class Book implements Serializable {
 	public void setDelUserId(String delUserId) {
 		this.delUserId = delUserId;
 	}
-
-	public String getDelId() {
-		return delId;
-	}
-
-	public void setDelId(String delId) {
-		this.delId = delId;
-	}
-
+	
 	public boolean isDelFlg() {
 		return delFlg;
 	}

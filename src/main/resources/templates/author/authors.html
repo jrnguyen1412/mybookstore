@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">	
+	<title>Book Store - Authors</title>
+</head>
+<body>
+    <nav th:replace="layout :: header"></nav>
+
+    <div class="container main-content list">
+        <div class="row">
+            <a th:href="@{/author/addAuthor}" class="btn btn-success pull-left">
+                <span class="glyphicon glyphicon-plus"></span> Add new author
+            </a>
+            <form class="form-inline pull-right" action = "#" th:action="@{/author/search}" method="POST">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="query" placeholder="Type author name..." />
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+        <th:block th:if="${#lists.isEmpty(authors)}">
+        	<div class="row">No author</div>
+        </th:block>
+        <th:block th:unless="${#lists.isEmpty(authors)}">
+        	<div class="row">
+        		<table class="table table-bordered table-hover">
+        			<thead>
+        				<tr>
+        					<th>No.</th>
+        					<th>Author ID</th>
+        					<th>Author Name</th>
+        					<th>Author Sex</th>
+        					<th>Author BOD</th>
+        					<th>Edit</th>
+        					<th>Delete</th>
+        				</tr>
+        			</thead>
+        			<tbody>
+        				<tr th:each="author, iterStat : ${authors}">
+        					<td th:text="${iterStat.count}"></td>
+        					<td th:text="${author.authorId}"></td>
+        					<td th:text="${author.authorName}"></td>
+        					<td th:text="${author.authorSex}"></td>
+        					<td th:text="${author.authorDob}"></td>
+        					<td><a th:href="@{/author/{authorId}/edit(authorId=${author.authorId})}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+        					<td><a th:href="@{/author/{authorId}/delete(authorId=${author.authorId})}"><span class="glyphicon glyphicon-trash"></span></a></td>
+        				</tr>
+        			</tbody>
+        		</table>
+        	</div>
+        </th:block>
+    </div>
+    <!-- /.container -->
+
+    <footer th:replace="layout :: footer"></footer>
+</body>
+</html>
